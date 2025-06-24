@@ -1,18 +1,17 @@
 package com.mrbarda.restapp.model;
 
-import com.mrbarda.restapp.model.TipoMovimiento;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "movimientos_inventario")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MovimientoInventario {
 
     @Id
@@ -28,19 +27,15 @@ public class MovimientoInventario {
     @JoinColumn(name = "proveedor_id", nullable = false)
     private Proveedor proveedor;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime fecha;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoMovimiento tipoMovimiento;
+    @Column(nullable = false, length = 20)
+    private String tipoMovimiento; // ENTRADA, SALIDA
 
-    @NotNull
-    @DecimalMin(value = "0.01", message = "Cantidad debe ser mayor a cero")
+    @Column(nullable = false)
     private BigDecimal cantidad;
 
-    @Size(max = 255)
+    @Column(length = 300)
     private String observacion;
 }
-

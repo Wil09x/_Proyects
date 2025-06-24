@@ -7,20 +7,27 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "reportes_diarios")
+@Table(name = "reporte_diario")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ReporteDiario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer id;
 
+    @Column(nullable = false)
     private LocalDate fecha;
 
+    @Column(nullable = false)
     private BigDecimal totalVentas;
-    private Integer pedidosAtendidos;
-    private Integer reservasRegistradas;
-    private BigDecimal totalCaja;
+
+    @Column(nullable = false)
+    private BigDecimal totalEfectivo;
+
+    @Column(nullable = false)
+    private BigDecimal totalTarjeta;
 }

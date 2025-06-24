@@ -1,16 +1,14 @@
 package com.mrbarda.restapp.model;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
-import com.mrbarda.restapp.model.TipoCliente;
-import com.mrbarda.restapp.model.TipoDocumento;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "clientes")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cliente {
 
     @Id
@@ -18,36 +16,31 @@ public class Cliente {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoCliente tipoCliente;
+    @Column(length = 20)
+    private String tipoCliente; // NATURAL o JURIDICA
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoDocumento tipoDocumento;
+    @Column(length = 20)
+    private String tipoDocumento; // DNI o RUC
 
-    @NotBlank
-    @Size(min = 8, max = 11)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 20)
     private String numeroDocumento;
 
-    @Size(max = 100)
+    @Column(length = 100)
     private String razonSocial;
 
-    @Pattern(regexp = "^9\\d{8}$")
+    @Column(length = 20)
     private String telefono;
 
-    @Email
+    @Column(length = 100)
     private String email;
 
     @Column(nullable = false)
-    private Boolean esUsuario = false;
+    private Boolean esUsuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", unique = true)
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }

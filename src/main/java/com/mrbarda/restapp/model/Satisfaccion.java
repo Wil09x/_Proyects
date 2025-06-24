@@ -1,15 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "satisfaccion")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "satisfacciones")
 public class Satisfaccion {
 
     @Id
@@ -17,23 +16,13 @@ public class Satisfaccion {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
-    @NotNull
-    @Min(1)
-    @Max(5)
     @Column(nullable = false)
-    private Integer puntuacion;
+    private Integer puntuacion; // 1 a 5
 
-    @Size(max = 255)
+    @Column(length = 300)
     private String comentario;
 }
-

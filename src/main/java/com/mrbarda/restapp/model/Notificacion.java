@@ -1,17 +1,16 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "notificaciones")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Notificacion {
 
     @Id
@@ -19,22 +18,12 @@ public class Notificacion {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    private String titulo;
-
-    @NotBlank
+    @Column(nullable = false, length = 200)
     private String mensaje;
 
-    private Boolean leido = false;
+    @Column(nullable = false)
+    private LocalDateTime fechaHora;
 
-    @ManyToOne
-    @JoinColumn(name = "remitente_id")
-    private Usuario remitente;
-
-    @ManyToOne
-    @JoinColumn(name = "destinatario_id", nullable = false)
-    private Usuario destinatario;
-
-    private LocalDateTime fechaEnvio;
+    @Column(nullable = false)
+    private Boolean leida;
 }
-

@@ -1,17 +1,17 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "cajas")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Caja {
 
     @Id
@@ -19,22 +19,18 @@ public class Caja {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    private LocalDateTime fechaApertura;
-    private LocalDateTime fechaCierre;
-
-    @NotNull
-    @DecimalMin("0.00")
     @Column(nullable = false)
-    private BigDecimal saldoInicial;
+    private LocalDateTime fechaHoraApertura;
 
-    @DecimalMin("0.00")
-    private BigDecimal saldoFinal;
+    @Column
+    private LocalDateTime fechaHoraCierre;
 
     @Column(nullable = false)
-    private Boolean cerrada = false;
+    private BigDecimal montoInicial;
 
-    @ManyToOne
-    @JoinColumn(name = "encargado_id", nullable = false)
-    private Empleado encargado;
+    @Column
+    private BigDecimal montoFinal;
+
+    @Column(nullable = false)
+    private Boolean abierta;
 }
-

@@ -13,18 +13,17 @@ public class CajaDTO {
 
     private Integer id;
 
-    private LocalDateTime fechaApertura;
-    private LocalDateTime fechaCierre;
+    @NotNull(message = "La fecha de apertura es obligatoria")
+    private LocalDateTime fechaHoraApertura;
 
-    @NotNull(message = "El saldo inicial es obligatorio")
+    private LocalDateTime fechaHoraCierre;
+
+    @NotNull(message = "El monto inicial es obligatorio")
     @DecimalMin(value = "0.00")
-    private BigDecimal saldoInicial;
+    private BigDecimal montoInicial;
 
-    private BigDecimal saldoFinal;
+    private BigDecimal montoFinal;
 
-    private Boolean cerrada;
-
-    @NotNull(message = "El encargado es obligatorio")
-    private Integer encargadoId;
+    @NotNull(message = "Debe indicar si está abierta")
+    private Boolean abierta;
 }
-

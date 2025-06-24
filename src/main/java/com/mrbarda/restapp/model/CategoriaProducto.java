@@ -1,16 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "categorias_producto")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CategoriaProducto {
 
     @Id
@@ -18,12 +16,6 @@ public class CategoriaProducto {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Size(max = 60)
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false, length = 100)
     private String nombre;
-
-    @Column(nullable = false)
-    private Boolean activo = true;
 }
-

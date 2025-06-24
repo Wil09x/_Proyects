@@ -11,27 +11,32 @@ public class ClienteDTO {
     private Integer id;
 
     @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 100)
     private String nombre;
 
-    @NotNull(message = "El tipo de cliente es obligatorio")
-    private String tipoCliente; // NATURAL, JURIDICA
+    @NotBlank(message = "El tipo de cliente es obligatorio")
+    @Pattern(regexp = "NATURAL|JURIDICA", message = "Tipo de cliente debe ser NATURAL o JURIDICA")
+    private String tipoCliente;
 
-    @NotNull(message = "El tipo de documento es obligatorio")
-    private String tipoDocumento; // DNI, RUC
+    @NotBlank(message = "El tipo de documento es obligatorio")
+    @Pattern(regexp = "DNI|RUC", message = "Tipo de documento debe ser DNI o RUC")
+    private String tipoDocumento;
 
     @NotBlank(message = "El número de documento es obligatorio")
-    @Size(min = 8, max = 11)
+    @Size(min = 8, max = 11, message = "El documento debe tener entre 8 y 11 caracteres")
     private String numeroDocumento;
 
+    @Size(max = 100)
     private String razonSocial;
 
-    @Pattern(regexp = "^9\\d{8}$", message = "Número de teléfono inválido")
+    @Size(max = 20)
     private String telefono;
 
-    @Email(message = "Correo inválido")
+    @Email(message = "El correo no es válido")
     private String email;
 
+    @NotNull(message = "Debe indicar si es usuario")
     private Boolean esUsuario;
 
-    private Integer usuarioId;
+    private Integer usuarioId; // nullable, solo si esUsuario = true
 }

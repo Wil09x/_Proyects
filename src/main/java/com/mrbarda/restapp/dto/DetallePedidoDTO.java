@@ -12,16 +12,14 @@ public class DetallePedidoDTO {
 
     private Integer id;
 
-    @NotNull(message = "El ID del platillo es obligatorio")
-    private Integer platilloId;
-
-    @NotNull(message = "El precio unitario es obligatorio")
-    private BigDecimal precioUnitario;
+    @NotNull(message = "El producto es obligatorio")
+    private Integer productoId;
 
     @NotNull(message = "La cantidad es obligatoria")
-    @Min(1)
+    @Min(value = 1, message = "La cantidad mínima es 1")
     private Integer cantidad;
 
+    @NotNull(message = "El subtotal es obligatorio")
+    @DecimalMin(value = "0.01", message = "El subtotal debe ser mayor a 0")
     private BigDecimal subtotal;
 }
-

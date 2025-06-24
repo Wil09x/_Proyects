@@ -1,15 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "roles")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Rol {
 
     @Id
@@ -17,7 +16,6 @@ public class Rol {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, length = 50)
     private String nombre;
 }

@@ -3,8 +3,7 @@ package com.mrbarda.restapp.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,12 +15,8 @@ public class TurnoEmpleadoDTO {
     @NotNull(message = "El empleado es obligatorio")
     private Integer empleadoId;
 
-    @NotNull(message = "La fecha del turno es obligatoria")
-    private LocalDate fecha;
+    @NotNull(message = "La hora de inicio es obligatoria")
+    private LocalDateTime horaInicio;
 
-    private LocalTime horaEntrada;
-    private LocalTime horaSalida;
-
-    private Boolean presente;
+    private LocalDateTime horaFin;
 }
-

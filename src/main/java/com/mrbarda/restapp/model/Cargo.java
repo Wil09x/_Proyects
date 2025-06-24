@@ -1,16 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import com.mrbarda.restapp.model.CargoNombre;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "cargos")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cargo {
 
     @Id
@@ -18,8 +16,9 @@ public class Cargo {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = true)
-    private CargoNombre nombre;
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(length = 255)
+    private String descripcion;
 }

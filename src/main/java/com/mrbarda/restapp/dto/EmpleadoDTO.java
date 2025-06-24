@@ -11,21 +11,23 @@ public class EmpleadoDTO {
     private Integer id;
 
     @NotBlank(message = "Los nombres son obligatorios")
+    @Size(max = 100)
     private String nombres;
 
     @NotBlank(message = "Los apellidos son obligatorios")
+    @Size(max = 100)
     private String apellidos;
 
     @NotBlank(message = "El DNI es obligatorio")
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 8, message = "El DNI debe tener 8 dígitos")
     private String dni;
 
-    @Pattern(regexp = "^9\\d{8}$", message = "Número de teléfono inválido")
+    @Size(max = 20)
     private String telefono;
 
-    @NotNull(message = "El cargo es obligatorio")
-    private Integer cargoId;
+    @NotBlank(message = "El cargo es obligatorio")
+    @Size(max = 50)
+    private String cargo;
 
     private Integer usuarioId;
 }
-

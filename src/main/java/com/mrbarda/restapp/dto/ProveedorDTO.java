@@ -11,22 +11,27 @@ public class ProveedorDTO {
     private Integer id;
 
     @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 100)
     private String nombre;
 
-    @NotBlank(message = "El tipo de documento es obligatorio")
+    @Pattern(regexp = "DNI|RUC", message = "Debe ser DNI o RUC")
     private String tipoDocumento;
 
-    @NotBlank(message = "El número de documento es obligatorio")
-    @Size(min = 8, max = 11)
+    @Size(max = 20)
     private String numeroDocumento;
 
+    @Size(max = 100)
     private String razonSocial;
 
-    @Pattern(regexp = "^9\\d{8}$", message = "Número telefónico inválido")
+    @Size(max = 20)
     private String telefono;
 
-    @Email
+    @Email(message = "Correo no válido")
     private String email;
 
+    @Size(max = 200)
     private String direccion;
+
+    @NotNull
+    private Boolean activo;
 }

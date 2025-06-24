@@ -1,19 +1,17 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "descuentos_promociones")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "descuentos_promocion")
 public class DescuentoPromocion {
 
     @Id
@@ -21,21 +19,15 @@ public class DescuentoPromocion {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    private String descripcion;
-
-    @DecimalMin("0.01")
     @Column(nullable = false)
     private BigDecimal porcentaje;
 
+    @Column(nullable = false)
     private LocalDateTime fechaInicio;
+
+    @Column(nullable = false)
     private LocalDateTime fechaFin;
-
-    private Boolean activo = true;
-
-    @ManyToMany
-    private List<Producto> productos;
 }
-

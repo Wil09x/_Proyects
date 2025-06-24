@@ -1,18 +1,17 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "facturas")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Factura {
 
     @Id
@@ -20,41 +19,32 @@ public class Factura {
     @EqualsAndHashCode.Include
     private Integer id;
 
+    @Column(nullable = false)
     private LocalDateTime fechaEmision;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @NotNull
     @OneToOne
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String tipoComprobante;
+    @Column(nullable = false, length = 10)
+    private String tipoComprobante; // BOLETA o FACTURA
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String numeroSerie;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String numeroDocumento;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MetodoPago formaPago;
+    @Column(length = 20)
+    private String formaPago; // EFECTIVO, TARJETA, TRANSFERENCIA
 
-    @NotNull
-    @DecimalMin("0.00")
     @Column(nullable = false)
     private BigDecimal total;
 
     @Column(nullable = false)
-    private Boolean anulado = false;
+    private Boolean anulado;
 }
-

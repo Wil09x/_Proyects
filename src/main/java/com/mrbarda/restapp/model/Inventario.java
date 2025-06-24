@@ -1,16 +1,16 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "inventario")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Inventario {
 
     @Id
@@ -18,25 +18,12 @@ public class Inventario {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Size(max = 80)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombreInsumo;
 
-    @NotBlank
-    @Size(max = 20)
-    @Column(nullable = false)
-    private String unidadMedida;
+    @Column(nullable = false, length = 20)
+    private String unidadMedida; // kg, litros, unidades
 
-    @NotNull
-    @DecimalMin("0.00")
     @Column(nullable = false)
     private BigDecimal cantidadDisponible;
-
-    @DecimalMin("0.00")
-    private BigDecimal stockMinimo;
-
-    @Column(nullable = false)
-    private Boolean activo = true;
 }
-

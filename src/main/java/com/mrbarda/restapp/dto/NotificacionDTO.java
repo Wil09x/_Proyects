@@ -12,19 +12,13 @@ public class NotificacionDTO {
 
     private Integer id;
 
-    @NotBlank(message = "El título es obligatorio")
-    private String titulo;
-
     @NotBlank(message = "El mensaje es obligatorio")
+    @Size(max = 200)
     private String mensaje;
 
-    private Boolean leido;
+    @NotNull(message = "La fecha y hora es obligatoria")
+    private LocalDateTime fechaHora;
 
-    private Integer remitenteId;
-
-    @NotNull(message = "El destinatario es obligatorio")
-    private Integer destinatarioId;
-
-    private LocalDateTime fechaEnvio;
+    @NotNull(message = "El estado de lectura es obligatorio")
+    private Boolean leida;
 }
-

@@ -18,13 +18,13 @@ public class ReservaDTO {
     @NotNull(message = "La mesa es obligatoria")
     private Integer mesaId;
 
-    @NotNull(message = "La fecha y hora es obligatoria")
+    @NotNull(message = "La fecha y hora de reserva es obligatoria")
     private LocalDateTime fechaHora;
 
     @NotNull(message = "El número de personas es obligatorio")
-    @Min(1)
+    @Min(value = 1, message = "Debe haber al menos 1 persona")
     private Integer numeroPersonas;
 
     @NotBlank(message = "El estado es obligatorio")
-    private String estado;
+    private String estado; // PENDIENTE, CONFIRMADA, CANCELADA
 }

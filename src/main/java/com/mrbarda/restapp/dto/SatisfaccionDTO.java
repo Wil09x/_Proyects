@@ -10,18 +10,14 @@ public class SatisfaccionDTO {
 
     private Integer id;
 
-    @NotNull(message = "El ID del pedido es obligatorio")
+    @NotNull(message = "El pedido es obligatorio")
     private Integer pedidoId;
-
-    @NotNull(message = "El ID del cliente es obligatorio")
-    private Integer clienteId;
 
     @NotNull(message = "La puntuación es obligatoria")
     @Min(1)
     @Max(5)
     private Integer puntuacion;
 
-    @Size(max = 255, message = "Comentario máximo 255 caracteres")
+    @Size(max = 300)
     private String comentario;
 }
-

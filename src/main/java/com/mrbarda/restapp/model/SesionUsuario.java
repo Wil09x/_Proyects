@@ -6,11 +6,11 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "sesiones_usuario")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class SesionUsuario {
 
     @Id
@@ -22,9 +22,9 @@ public class SesionUsuario {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
+    @Column(nullable = false)
     private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
 
-    private String ipOrigen;
-    private String userAgent;
+    @Column
+    private LocalDateTime fechaFin;
 }

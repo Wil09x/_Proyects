@@ -1,15 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "empleados")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Empleado {
 
     @Id
@@ -17,31 +16,22 @@ public class Empleado {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Size(max = 50)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombres;
 
-    @NotBlank
-    @Size(max = 50)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String apellidos;
 
-    @NotBlank
-    @Size(min = 8, max = 8)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 20)
     private String dni;
 
-    @Pattern(regexp = "^9\\d{8}$")
-    @Column(length = 9)
+    @Column(length = 20)
     private String telefono;
 
-    @ManyToOne
-    @JoinColumn(name = "cargo_id", nullable = false)
-    private Cargo cargo;
+    @Column(length = 50)
+    private String cargo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", unique = true)
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }
-

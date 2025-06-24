@@ -17,11 +17,12 @@ public class UsuarioDTO {
     private String username;
 
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6)
+    @Size(min = 6, max = 100)
     private String password;
 
+    @NotNull(message = "El estado activo es obligatorio")
     private Boolean activo;
 
-    private Set<Integer> rolesId;
+    @NotEmpty(message = "Debe tener al menos un rol")
+    private Set<Integer> rolesIds;
 }
-

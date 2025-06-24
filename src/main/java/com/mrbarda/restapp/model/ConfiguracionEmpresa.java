@@ -1,16 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
-import java.math.BigDecimal;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "configuracion_empresa")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ConfiguracionEmpresa {
 
     @Id
@@ -18,22 +16,18 @@ public class ConfiguracionEmpresa {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String nombreEmpresa;
+    @Column(nullable = false, length = 100)
+    private String nombre;
 
-    @NotBlank
-    private String ruc;
-
+    @Column(length = 200)
     private String direccion;
+
+    @Column(length = 100)
     private String telefono;
+
+    @Column(length = 100)
     private String email;
+
+    @Column(length = 255)
     private String logoUrl;
-
-    @DecimalMin("0.00")
-    private BigDecimal igv;
-
-    @DecimalMin("0.00")
-    private BigDecimal porcentajeServicio;
 }
-

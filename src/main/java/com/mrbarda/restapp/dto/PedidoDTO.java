@@ -17,21 +17,18 @@ public class PedidoDTO {
     @NotNull(message = "El cliente es obligatorio")
     private Integer clienteId;
 
-    @NotNull(message = "El empleado es obligatorio")
+    @NotNull(message = "El empleado que atiende es obligatorio")
     private Integer empleadoId;
 
-    private Integer mesaId;
-
+    @NotNull(message = "La fecha y hora es obligatoria")
     private LocalDateTime fechaHora;
 
     @NotBlank(message = "El estado del pedido es obligatorio")
-    private String estado;
+    private String estado; // PENDIENTE, PREPARANDO, ENTREGADO, PAGADO
 
-    @NotBlank(message = "El método de pago es obligatorio")
-    private String metodoPago;
-
+    @NotNull(message = "El total es obligatorio")
     private BigDecimal total;
 
+    @NotEmpty(message = "Debe contener al menos un detalle")
     private List<DetallePedidoDTO> detalles;
 }
-

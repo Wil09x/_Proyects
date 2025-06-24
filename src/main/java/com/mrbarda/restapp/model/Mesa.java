@@ -1,16 +1,14 @@
 package com.mrbarda.restapp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
-import com.mrbarda.restapp.model.EstadoMesa;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "mesas")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Mesa {
 
     @Id
@@ -18,18 +16,12 @@ public class Mesa {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotNull
-    @Min(1)
     @Column(nullable = false)
     private Integer numero;
 
-    @NotNull
-    @Min(1)
     @Column(nullable = false)
     private Integer capacidad;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private EstadoMesa estado;
+    @Column(nullable = false, length = 20)
+    private String estado; // DISPONIBLE, RESERVADA, OCUPADA
 }

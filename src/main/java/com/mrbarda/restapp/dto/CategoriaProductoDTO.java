@@ -1,6 +1,6 @@
 package com.mrbarda.restapp.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
@@ -11,6 +11,6 @@ public class CategoriaProductoDTO {
     private Integer id;
 
     @NotBlank(message = "El nombre de la categoría es obligatorio")
+    @Size(max = 100)
     private String nombre;
 }
-

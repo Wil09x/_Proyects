@@ -1,15 +1,16 @@
 package com.mrbarda.restapp.model;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "productos")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Producto {
 
     @Id
@@ -17,29 +18,22 @@ public class Producto {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @NotBlank
-    @Size(max = 80)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Size(max = 255)
+    @Column(length = 300)
     private String descripcion;
 
-    @NotNull
-    @DecimalMin("0.00")
     @Column(nullable = false)
     private BigDecimal precio;
 
-    @Min(0)
+    @Column(nullable = false)
     private Integer stock;
 
-    private String urlImagen;
-
-    @Column(nullable = false)
-    private Boolean activo = true;
+    @Column(length = 255)
+    private String imagenUrl;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private CategoriaProducto categoria;
 }
-
