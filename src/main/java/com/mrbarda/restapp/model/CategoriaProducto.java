@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "categorias_producto")
+@Table(name = "categorias_productos")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CategoriaProducto {
 

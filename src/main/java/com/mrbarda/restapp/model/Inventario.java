@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "inventario")
+@Table(name = "inventarios")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Inventario {
 

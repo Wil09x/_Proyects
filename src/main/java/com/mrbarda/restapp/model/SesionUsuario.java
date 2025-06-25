@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sesiones_usuario")
+@Table(name = "sesiones_usuarios")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class SesionUsuario {
 

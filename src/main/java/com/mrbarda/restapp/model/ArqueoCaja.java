@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "arqueo_caja")
+@Table(name = "arqueo_cajas")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ArqueoCaja {
 

@@ -1,13 +1,16 @@
 package com.mrbarda.restapp.controller;
 
 import com.mrbarda.restapp.dto.ConfiguracionEmpresaDTO;
+import com.mrbarda.restapp.model.ConfiguracionEmpresa;
 import com.mrbarda.restapp.service.IConfiguracionEmpresaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/configuracion")
@@ -16,32 +19,39 @@ import java.util.List;
 public class ConfiguracionEmpresaController {
 
     private final IConfiguracionEmpresaService service;
+    private final ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ConfiguracionEmpresaDTO> save(@Valid @RequestBody ConfiguracionEmpresaDTO dto) {
-        return ResponseEntity.ok(service.save(dto));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<ConfiguracionEmpresaDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ConfiguracionEmpresaDTO> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<ConfiguracionEmpresaDTO> save(@Valid @RequestBody ConfiguracionEmpresaDTO dto) throws Exception {
+        ConfiguracionEmpresa entity = mapper.map(dto, ConfiguracionEmpresa.class);
+        ConfiguracionEmpresa saved = service.save(entity);
+        return ResponseEntity.ok(mapper.map(saved, ConfiguracionEmpresaDTO.class));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ConfiguracionEmpresaDTO> update(@PathVariable Integer id, @Valid @RequestBody ConfiguracionEmpresaDTO dto) {
-        dto.setId(id);
-        return ResponseEntity.ok(service.update(dto));
+    public ResponseEntity<ConfiguracionEmpresaDTO> update(@PathVariable Integer id, @Valid @RequestBody ConfiguracionEmpresaDTO dto) throws Exception {
+        ConfiguracionEmpresa entity = mapper.map(dto, ConfiguracionEmpresa.class);
+        ConfiguracionEmpresa updated = service.update(entity, id);
+        return ResponseEntity.ok(mapper.map(updated, ConfiguracionEmpresaDTO.class));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ConfiguracionEmpresaDTO>> findAll() throws Exception {
+        List<ConfiguracionEmpresaDTO> list = service.findAll().stream()
+                .map(e -> mapper.map(e, ConfiguracionEmpresaDTO.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ConfiguracionEmpresaDTO> findById(@PathVariable Integer id) throws Exception {
+        ConfiguracionEmpresa entity = service.findById(id);
+        return ResponseEntity.ok(mapper.map(entity, ConfiguracionEmpresaDTO.class));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) throws Exception {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
-

@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "satisfaccion")
+@Table(name = "satisfacciones")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Satisfaccion {
 

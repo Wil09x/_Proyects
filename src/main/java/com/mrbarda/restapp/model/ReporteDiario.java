@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "reporte_diario")
+@Table(name = "reportes_diarios")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ReporteDiario {
 

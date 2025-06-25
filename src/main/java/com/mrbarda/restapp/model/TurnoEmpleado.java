@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "turnos_empleado")
+@Table(name = "turno_empleados")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TurnoEmpleado {
 
