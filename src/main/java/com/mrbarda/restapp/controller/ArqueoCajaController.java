@@ -2,7 +2,11 @@ package com.mrbarda.restapp.controller;
 
 import com.mrbarda.restapp.dto.ArqueoCajaDTO;
 import com.mrbarda.restapp.model.ArqueoCaja;
+import com.mrbarda.restapp.model.Caja;
+import com.mrbarda.restapp.model.Empleado;
 import com.mrbarda.restapp.service.IArqueoCajaService;
+import com.mrbarda.restapp.service.ICajaService;
+import com.mrbarda.restapp.service.IEmpleadoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,41 +22,57 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ArqueoCajaController {
 
-    private final IArqueoCajaService service;
-    private final ModelMapper mapper;
+    private final IArqueoCajaService arqueoService;
+    private final ICajaService cajaService;
+    private final IEmpleadoService empleadoService;
+    private final ModelMapper modelMapper;
 
     @PostMapping
     public ResponseEntity<ArqueoCajaDTO> save(@Valid @RequestBody ArqueoCajaDTO dto) throws Exception {
-        ArqueoCaja entity = mapper.map(dto, ArqueoCaja.class);
-        ArqueoCaja saved = service.save(entity);
-        return ResponseEntity.ok(mapper.map(saved, ArqueoCajaDTO.class));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ArqueoCajaDTO> update(@PathVariable Integer id, @Valid @RequestBody ArqueoCajaDTO dto) throws Exception {
-        ArqueoCaja entity = mapper.map(dto, ArqueoCaja.class);
-        ArqueoCaja updated = service.update(entity, id);
-        return ResponseEntity.ok(mapper.map(updated, ArqueoCajaDTO.class));
+        ArqueoCaja entity = mapDtoToEntity(dto);
+        entity.setDiferencia(entity.getMontoDeclarado().subtract(entity.getMontoCalculado()));
+        ArqueoCaja saved = arqueoService.save(entity);
+        return ResponseEntity.ok(mapEntityToDto(saved));
     }
 
     @GetMapping
     public ResponseEntity<List<ArqueoCajaDTO>> findAll() throws Exception {
-        List<ArqueoCajaDTO> list = service.findAll()
-                .stream()
-                .map(e -> mapper.map(e, ArqueoCajaDTO.class))
+        List<ArqueoCajaDTO> list = arqueoService.findAll()
+                .stream().map(this::mapEntityToDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ArqueoCajaDTO> findById(@PathVariable Integer id) throws Exception {
-        ArqueoCaja entity = service.findById(id);
-        return ResponseEntity.ok(mapper.map(entity, ArqueoCajaDTO.class));
+        return ResponseEntity.ok(mapEntityToDto(arqueoService.findById(id)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ArqueoCajaDTO> update(@PathVariable Integer id, @Valid @RequestBody ArqueoCajaDTO dto) throws Exception {
+        ArqueoCaja entity = mapDtoToEntity(dto);
+        entity.setDiferencia(entity.getMontoDeclarado().subtract(entity.getMontoCalculado()));
+        ArqueoCaja updated = arqueoService.update(entity, id);
+        return ResponseEntity.ok(mapEntityToDto(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) throws Exception {
-        service.delete(id);
+        arqueoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private ArqueoCaja mapDtoToEntity(ArqueoCajaDTO dto) throws Exception {
+        ArqueoCaja entity = modelMapper.map(dto, ArqueoCaja.class);
+        entity.setCaja(cajaService.findById(dto.getCajaId()));
+        entity.setEmpleado(empleadoService.findById(dto.getEmpleadoId()));
+        return entity;
+    }
+
+    private ArqueoCajaDTO mapEntityToDto(ArqueoCaja entity) {
+        ArqueoCajaDTO dto = modelMapper.map(entity, ArqueoCajaDTO.class);
+        dto.setCajaId(entity.getCaja().getId());
+        dto.setEmpleadoId(entity.getEmpleado().getId());
+        return dto;
     }
 }

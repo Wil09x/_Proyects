@@ -1,6 +1,6 @@
 package com.mrbarda.restapp.model;
 
-public enum CargoNombre {
+public enum CargoEmpleado{
     ADMIN, COCINERO, CAJERA, MOZO
 }
 

@@ -13,18 +13,25 @@ public class ArqueoCajaDTO {
 
     private Integer id;
 
-    @NotNull(message = "La fecha y hora es obligatoria")
+    @NotNull(message = "ID de la caja es obligatorio")
+    private Integer cajaId;
+
+    @NotNull(message = "ID del empleado es obligatorio")
+    private Integer empleadoId;
+
+    @NotNull(message = "Fecha y hora es obligatoria")
     private LocalDateTime fechaHora;
 
-    @NotNull(message = "El monto declarado es obligatorio")
-    @DecimalMin(value = "0.00")
+    @NotNull(message = "Monto declarado es obligatorio")
+    @DecimalMin("0.00")
     private BigDecimal montoDeclarado;
 
-    @NotNull(message = "El monto calculado es obligatorio")
-    @DecimalMin(value = "0.00")
+    @NotNull(message = "Monto calculado es obligatorio")
+    @DecimalMin("0.00")
     private BigDecimal montoCalculado;
+
+    private BigDecimal diferencia;
 
     @Size(max = 255)
     private String observacion;
 }
-

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ArqueoCajaService extends GenericService<ArqueoCaja, Integer> implements IArqueoCajaService {
-
     private final IArqueoCajaRepo repo;
 
     @Override

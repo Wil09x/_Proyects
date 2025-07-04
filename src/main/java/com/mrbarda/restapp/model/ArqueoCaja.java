@@ -19,14 +19,25 @@ public class ArqueoCaja {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "caja_id", nullable = false)
+    private Caja caja;
+
+    @ManyToOne
+    @JoinColumn(name = "empleado_id", nullable = false)
+    private Empleado empleado;
+
+    @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
-    @Column(nullable = false)
+    @Column(name = "monto_declarado", nullable = false)
     private BigDecimal montoDeclarado;
 
-    @Column(nullable = false)
+    @Column(name = "monto_calculado", nullable = false)
     private BigDecimal montoCalculado;
+
+    @Column(nullable = false)
+    private BigDecimal diferencia;
 
     @Column(length = 255)
     private String observacion;
